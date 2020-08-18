@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact - {% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Contact Support</h1>
+        <p class="lead">Unofficial Website for students/teachers of Calcutta University (CU) .</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}">View All Articles</a>
+        </p>
+    </div>
+    <div class="container">
+        <p>
+            If you forgot your password, there is no problem. You can always reset your password via pressing the Forgot Password link on the <a href="{% url 'login' %}">Log In</a> page.
+        </p>
+        <p>
+            If you are facing any issues on the website, you can <a class="btn btn-sm btn-info" href="{% url 'article_new' %}" role="button">post an article</a> about the issue on this website, or email <strong>souravdas2nd@gmail.com</strong>.
+        </p>
+    </div>
+{% endblock content %}

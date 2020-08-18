@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Features - {% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">All about current/upcoming features of CU Blog</h1>
+        <p class="lead">Unofficial Website for students/teachers of Calcutta University (CU) .</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}">View All Articles</a>
+        </p>
+    </div>
+    <div class="container">
+        <h2>Current Features</h2>
+        <ul>
+            <li>Every user can Log In/Register, and can set unique username. They can customize their profile.</li>
+            <li>Every logged-in user can post unlimited articles. Emojis can also be included in the articles.</li>
+            <li>Users can visit other awesome user's profiles, and can know more about them.</li>
+            <li>Users can comment below every article. Now users also have the option to Edit or Delete their comments.</li>
+            <li>Logged-in users can change their existing password <a href="{% url 'password change' %}">here</a>, or clicking on their username at top-right.</li>
+            <li>If registered user forgot their password, they can reset their password by providing their email via clicking "Forgot Password" on the <a href="{% url 'login' %}">Log In</a> page.</li>
+        </ul>
+        <h2>Upcoming Features</h2>
+        <ul>
+            <li>Users can Follow other users, and can be Followed by other users.</li>
+            <li>Users can Vote Up/Vote Down any article.</li>
+            <li>Users can connect their Facebook/Google Account, and get their corresponding profile picture from Facebook/Google.</li>
+        </ul>
+        <p>If you have got suggestion, then you can <a href="{% url article_new %}post articles</a> about your suggestion on this blog, or you can <a href="{% url 'contact' %}">Contact Support</a></p>
+    </div>
+{% endblock content %}

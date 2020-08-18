@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block title %}{{ object.title }} - {% endblock title %}
+{% block content %}
+    <div class="article-entry">
+        <h2>{{ object.title }}</h2>
+        <p>By 
+            <a href="{% url 'profile' object.author.username %}">
+            {% if object.author.avatar %}
+                <img class="" style="width: 40px; border-radius: 50%;" src="{{object.author.avatar}}">
+            {% else %}
+                <img class="" style="width: 40px; border-radius: 50%;" src="https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg" alt="">
+            {% endif %}
+            
+                <span class="font-weight-bold text-dark">{{ object.author }}</span>
+            </a>    <br>
+            <span class="text-muted">{{ object.date }}</span>
+        </p>        
+        <p>{{ object.body|safe|linebreaks }}</p>
+    </div> 
+    
+    {% if object.author == user %}
+    <p><a href="{% url 'article_edit' article.pk article.slug %}">Edit</a> | <a href="{% url 'article_delete' article.pk article.slug %}">Delete</a></p>
+    {% endif %}
+
+    <div class="card-footer">
+        <h6>Comments</h6>
+        <a class="btn btn-info text-light" role="button" href="{% url 'comment_new' article.pk article.slug %}">Add Comment</a>
+        {% for comment in article.comments.all %}
+            <p>
+                {% if comment.author == user %}                                                    
+                    <div class="dropdown float-right">  <!-- this is for comment options -->
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            •••	
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="{% url 'comment_edit' comment.pk %}">Edit</a>
+                            <a class="dropdown-item" href="{% url 'comment_delete' comment.pk %}">Delete</a>
+                        </div>
+                    </div>
+                {% endif %}
+                <span class="font-weight-bold">
+                    <a class="text-dark" href="{% url 'profile' comment.author.username %}">{{ comment.author }}</a> &middot;
+                </span>
+                {{ comment }}
+            </p>          
+        {% empty %}
+            <p>No comments here yet!</p>
+        {% endfor %}
+    </div>
+    <p>Back to <a href="{% url 'article_list' %}">All Articles</a></p>
+{% endblock content %}

@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% block title %}Profile - {% endblock title %}
+
+{% block content %}
+    <h2>Awesome Profile of @{{ object.username }}</h2>    
+    <div class="card row">
+        
+        <div class="card-header">  
+              
+            <div class="row">
+                
+                <div class="col-md-auto">
+                    {% if object.avatar %}
+                        <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="{{object.avatar}}">
+                    {% else %}
+                        <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg" alt="">
+                    {% endif %}
+                </div>
+                <div class="col-md-auto">
+                    
+                    <h3>{{ object.first_name }} {{ object.last_name }}</h3>
+                    <h4>{{ object.college }}</h4>
+                    <h4>
+                    {% if object.university == 'cu'  %}
+                        Calcutta University
+                    {% endif %}
+                    </h4>
+
+                    {% if object.honours %}
+                    <h5>I love <strong>{{ object.honours }}</strong> ❤️</h5>
+                    {% endif %}
+
+                    {% if object.occupation %}
+                    <h6>I am a <strong>{{ object.occupation }}</strong></h6>
+                    {% endif %}
+                    <p>I joined this website on {{ object.date_joined }} <a class="text-dark" href="https://en.wikipedia.org/wiki/Indian_Standard_Time">(IST)</a></p>
+                    <!-- Edit Button -->
+                    {% if object.username == user.username %}
+                        <a class="btn btn-info btn-sm float-right" href="{% url 'profile_update' object.username %}">Edit</a>
+                    {% endif %}  
+                </div>
+            </div>      
+        </div>
+        <div class="card-body">
+            {% if object.bio %}
+                <p>{{object.bio}}</p>
+            {% else %}
+                <p>I have not yet filled something about my profile. Though I enjoy this website very much. Return later to check my profile.</p>
+            {% endif %}
+        </div>
+    </div>
+    <!-- spacing -->
+    <div>
+        <p class="font-weight-bold">Articles by {{ object.first_name }}</p>
+        <br>
+    </div>
+
+    <!-- listing articles by the author in this profile -->
+    {% for article in article_list %}            
+        {% if article.author == object %}
+        <div class="card">
+            <div class="card-header">
+                <a href="{% url 'article_detail' article.pk article.slug %}">
+                    <span class="font-weight-bold text-dark">{{ article.title }}</span> &middot;
+                </a>
+                <span class="text-muted">by 
+                    {% if article.author.avatar %}
+                        <img class="" style="width: 20px; border-radius: 50%;" src="{{article.author.avatar}}">
+                    {% else %}
+                        <img class="" style="width: 20px; border-radius: 50%;" src="https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg" alt="">
+                    {% endif %}
+                    <a href="{% url 'profile' article.author.username %}">{{ article.author }}</a> <br>
+                    {{ article.date }}</span>
+            </div>
+            <div class="card-body">
+                {{ article.body|safe|linebreaks }}    <!-- safe is include for text wrapping, line-breaks etc -->
+                
+                {% if article.author == user %}
+                    <a href="{% url 'article_edit' article.pk article.slug %}">Edit</a> | <a href="{% url 'article_delete' article.pk article.slug %}">Delete</a>    
+                {% endif %}                    
+                
+            </div>
+        </div>
+        {% endif %}        
+    {% endfor %}
+    <p>Back to <a href="{% url 'article_list' %}">All Articles</a></p>
+    
+{% endblock content %}

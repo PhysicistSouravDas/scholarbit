@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Announcements - {% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">Announcements</h1>
+        <p class="lead">Unofficial Website for students/teachers of Calcutta University (CU) .</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}">View All Articles</a>
+        </p>
+    </div>
+    <div class="container">
+        <p>There are currently no Announcements. Enjoy writing and reading articles here.</p>
+    </div>
+{% endblock content %}

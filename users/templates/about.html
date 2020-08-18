@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - {% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">About CU Blog</h1>
+        <p class="lead">Unofficial Website for students/teachers of Calcutta University (CU) .</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}">View All Articles</a>
+        </p>
+    </div>
+    <div class="container">
+        <p>
+            This website is created by a Physics Student of Scottish Church College, as a hobby project. 
+            This website is created using Django, a python web-development framework. Regular HTML, CSS, JavaScript are also used.
+        </p>
+        <p>
+            {% if user.is_authenticated %}
+                {{ user.first_name }}, since you are registered with this website, you own a <a href="{% url 'profile' user.username %}">unique profile page</a>    
+            {% else %}
+                It seems that you are not registered with this website, or have not logged in. <a href="{% url 'signup' %}">Register</a> now (or <a href="{% url 'login' %}">Log In</a> now) to get your unique profile.
+            {% endif %}                
+        </p>
+        <p>
+            One thing to note is that you cannot add your own custom profile picture. This is because this website has no scheme for earning money, so this website
+            is running on moderate resources. Storing so much images is not viable for this website. But in future, you can connect your Google/Facebook account to get
+            your profile picture from Google/Facebook. But currenly, you have access to cool avatars.
+        </p>
+        <p>
+            If you forgot your password, there is no problem. You can always reset your password via pressing the Forgot Password link on the <a href="{% url 'login' %}">Log In</a> page.
+        </p>
+        <p>
+            If you are facing any issues on the website, you can <a class="btn btn-sm btn-info" href="{% url 'article_new' %}" role="button">post an article</a> about the issue on this website, or <a href="{% url 'contact' %}">contact support</a>.
+        </p>
+    </div>
+{% endblock content %}

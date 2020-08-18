@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - {% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">scholarbit</h1>
+        <p class="lead">Social media for scholars 🎉</p>
+        <p class="lead">
+            <a class="btn btn-primary btn-lg" href="{% url 'article_list' %}">View All Articles</a>
+        </p>
+    </div>
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+          <div class="col-md-4">
+            <h2>What this blog about?</h2>
+            <p>This blog is created so that any students/teachers can write articles about what they like, and can interact with each other. This blog was created as a hobby project by a student of Calcutta University. This website is created fully using programming...</p>
+            <p><a class="btn btn-secondary" href="{% url 'about' %}" role="button">Read More &raquo;</a></p>
+          </div>
+          <div class="col-md-4">
+            {% if user.is_authenticated %}
+                <h2>What's in Home Page?</h2>
+                <p>Since this website is new, users are slowly growing up. In future, you can find important announcements, statistics, important links etc., in the home page. Don't forget to tell about this website to your near and dear ones, your friends, etc. </p>
+                <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+            {% else %}
+                <h2>Start Writing Articles</h2>
+                <p>What are you waiting for? Join this awesome blog and start writing your awesome articles now. Everybody else is waiting to see your posts. <strong>Sign Up</strong> if you are here for the first time, or <strong>Log In</strong> if you are already registered in CU Blog.</p>
+                <p><a class="btn btn-primary" href="{% url 'signup' %}" role="button">Sign Up</a><a class="btn btn-warning ml-2" href="{% url 'login' %}" role="button">Log In</a></p>
+            {% endif %}
+          </div>
+          <div class="col-md-4">
+            <h2>Why <em>beta</em></h2>
+            <p>This website was created as a hobby project. There are many features which are introduced being introduced here. This website is going through testing phase. All new updates/features will be announced via this Home page. So this website is still in <em>beta</em>, or testing phase.</p>
+            <p><a class="btn btn-secondary" href="#" role="button">Read More &raquo;</a></p>
+          </div>
+        </div>
+
+        <hr>
+    </div>
+{% endblock content %}

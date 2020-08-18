@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Edit Comment - {% endblock title %}
+
+{% block content %}
+    <h2>Edit your valuable Comment</h2>
+    <div class="container">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button class="btn btn-success ml-2" type="submit">Submit Comment</button>
+            <a class="btn btn-danger" href="{% url 'article_detail' comment.article.pk comment.article.slug %}">Cancel</a>
+            <!-- <a class="btn btn-danger" href="#">Cancel</a> -->
+        </form>
+    </div>
+{% endblock content %}
