@@ -152,7 +152,7 @@ EMAIL_USE_TLS = True
 BLOG_TITLE_MAX_LENGTH = 255
 
 # Configure Django App for Heroku.
-if ('HOME', '/app') in os.environ['HOME']:
+if ('HOME', '/app') in os.environ.items():
     import django_heroku
     django_heroku.settings(locals())
 
