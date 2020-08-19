@@ -21,4 +21,5 @@ class UserProfileForm(forms.ModelForm):
     # TODO: Define form fields here
     class Meta:
         model = CustomUser
-        fields = ('avatar', 'bio', 'college', 'university', 'occupation', 'honours', 'degree', 'age')
+        # fields = ('avatar', 'bio', 'college', 'university', 'occupation', 'honours', 'degree', 'age')
+        fields = ('bio', 'college', 'university', 'occupation', 'honours', 'degree', 'age')

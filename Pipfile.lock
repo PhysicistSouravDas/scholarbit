@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "0cd8fb0cb1bd92ff505a874f2eb951385a6cb911d86885602ebb3f87d23b026d"
+            "sha256": "eea3428f795252cd551b7727e5b8b694f421f64e97a909537a3760680f0303ed"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -45,6 +45,13 @@
             ],
             "index": "pypi",
             "version": "==0.3.1"
+        },
+        "django-simple-gravatar": {
+            "hashes": [
+                "sha256:fa29d80dadd8331e08e3b3de31b5b7b68b93edee49a8babd3939758c62e092d1"
+            ],
+            "index": "pypi",
+            "version": "==1.0.1"
         },
         "gunicorn": {
             "hashes": [

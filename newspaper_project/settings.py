@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     #3RD PARTY
     'crispy_forms',
+    'django_gravatar',
     
     #LOCAL APPS
     'users.apps.UsersConfig',
@@ -160,3 +161,6 @@ if ('HOME', '/app') in os.environ.items():
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+#GRAVATAR
+GRAVATAR_DEFAULT_URL = "https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg"
