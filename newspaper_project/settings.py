@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-import django_heroku
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -153,7 +152,10 @@ EMAIL_USE_TLS = True
 BLOG_TITLE_MAX_LENGTH = 255
 
 # Configure Django App for Heroku.
-django_heroku.settings(locals())
+if '/app' in os.environ['HOME']:
+    import django_heroku
+    django_heroku.settings(locals())
+
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
