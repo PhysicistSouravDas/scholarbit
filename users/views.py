@@ -38,6 +38,7 @@ class ProfileView(DetailView):
             context = super(ProfileView, self).get_context_data(**kwargs)
             context['article_list'] = Article.objects.all()
             context['articles_by_user_list'] = Article.objects.filter(author=self.get_object()) #.request.user)
+            context['article_count'] = Article.objects.filter(author=self.get_object()).count()
             # context['venue_list'] = Venue.objects.all()
             # context['festival_list'] = Festival.objects.all()
             # And so on for more models
