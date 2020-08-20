@@ -12,7 +12,8 @@ django-crispy = "*"
 gunicorn = "*"
 django-heroku = "*"
 whitenoise = "*"
-django-simple-gravatar = "*"
+markdown = "*"
+django-bleach = "*"
 
 [requires]
 python_version = "3.7"

@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY1')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     #3RD PARTY
     'crispy_forms',
+    'django_bleach',
     # 'django_gravatar', # The package installed from pip is outdated, so replaced with my own custom python files
     
     #LOCAL APPS

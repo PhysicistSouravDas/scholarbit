@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load gravatar %}
+{% load markdown_extras %}
 {% block title %}Profile - {% endblock title %}
 
 {% block content %}
@@ -54,7 +55,7 @@
     <!-- spacing -->
     <div>
         {% if articles_by_user_list %}
-            <p class="font-weight-bold">Articles by <strong>{{ object.first_name }}</strong></p>
+            <p class="font-weight-bold">{{ article_count }} Article{{ article_count|pluralize }} by {{ object.first_name }}</p>
             <br>
         {% else %}
             <p><strong>{{ object.first_name }} {{ object.last_name }}</strong> has not written anything till now.</p>
@@ -81,7 +82,7 @@
                     {{ article.date }}</span>
             </div>
             <div class="card-body">
-                {{ article.body|safe|linebreaks }}    <!-- safe is include for text wrapping, line-breaks etc -->
+                {{ article.body|markdown|safe|linebreaks }}    <!-- safe is include for text wrapping, line-breaks etc -->
                 
                 {% if article.author == user %}
                     <a href="{% url 'article_edit' article.pk article.slug %}">Edit</a> | <a href="{% url 'article_delete' article.pk article.slug %}">Delete</a>    

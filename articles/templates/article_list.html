@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load gravatar %}
+{% load markdown_extras %}
 {% block title %}Articles - {% endblock title %}
 {% block content %}
     {% for article in object_list %}
@@ -19,7 +20,7 @@
                     {{ article.date }}</span>
             </div>
             <div class="card-body">
-                {{ article.body|safe|linebreaks }}    <!-- safe is include for text wrapping, line-breaks etc -->
+                {{ article.body|markdown|safe|linebreaks }}    <!-- safe is include for text wrapping, line-breaks etc -->
                 
                 {% if article.author == user %}
                     <a href="{% url 'article_edit' article.pk article.slug %}">Edit</a> | <a href="{% url 'article_delete' article.pk article.slug %}">Delete</a>    

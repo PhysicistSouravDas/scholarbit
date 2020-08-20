@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
+from django_bleach.models import BleachField
 
 User = get_user_model()
 # Create your models here.
@@ -13,7 +14,7 @@ class Article(models.Model):
         editable=False,
         max_length=255,
     )
-    body = models.TextField()
+    body = BleachField()
     date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(
         # get_user_model(),

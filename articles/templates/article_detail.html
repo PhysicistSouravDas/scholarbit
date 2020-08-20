@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load gravatar %}
+{% load markdown_extras %}
 {% block title %}{{ object.title }} - {% endblock title %}
 {% block content %}
     <div class="article-entry">
@@ -17,7 +18,7 @@
             </a>    <br>
             <span class="text-muted">{{ object.date }}</span>
         </p>        
-        <p>{{ object.body|safe|linebreaks }}</p>
+        <p>{{ object.body|markdown|safe|linebreaks }}</p>
     </div> 
     
     {% if object.author == user %}
