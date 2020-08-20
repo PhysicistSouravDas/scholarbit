@@ -32,6 +32,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     #3RD PARTY
     'crispy_forms',
+    'django_bleach',
     # 'django_gravatar', # The package installed from pip is outdated, so replaced with my own custom python files
     
     #LOCAL APPS
