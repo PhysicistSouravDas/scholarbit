@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     #3RD PARTY
     'crispy_forms',
-    'django_gravatar',
+    # 'django_gravatar', # The package installed from pip is outdated, so replaced with my own custom python files
     
     #LOCAL APPS
     'users.apps.UsersConfig',
@@ -163,4 +163,6 @@ if ('HOME', '/app') in os.environ.items():
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #GRAVATAR
-GRAVATAR_DEFAULT_URL = "https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg"
+GRAVATAR_DEFAULT_URL = "retro"
+# "https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg"
+GRAVATAR_SECURE = True    # Will use https:// instead of http:// if True

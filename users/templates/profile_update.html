@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load gravatar %}
 {% load crispy_forms_tags %}
 {% block title %}Update Profile - {% endblock title %}
 
@@ -17,7 +18,8 @@
             {% if object.avatar %}
                 <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="{{object.avatar}}">
             {% else %}
-                <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg" alt="">
+                <!-- <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg" alt=""> -->
+                <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="{% gravatar_url object.email 200 %}" alt="">
             {% endif %}
         </div>
         <div class="col-md-auto">

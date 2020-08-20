@@ -15,7 +15,7 @@
                         <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="{{object.avatar}}">
                     {% else %}
                         <!-- <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg" alt=""> -->
-                        {% gravatar url object.email 200 %}}
+                        <img class="mx-auto d-block" style="width: 200px; border-radius: 50%;" src="{% gravatar_url object.email 200 %}" alt="">
                     {% endif %}
                 </div>
                 <div class="col-md-auto">
@@ -53,8 +53,13 @@
     </div>
     <!-- spacing -->
     <div>
-        <p class="font-weight-bold">Articles by {{ object.first_name }}</p>
-        <br>
+        {% if articles_by_user_list %}
+            <p class="font-weight-bold">Articles by <strong>{{ object.first_name }}</strong></p>
+            <br>
+        {% else %}
+            <p><strong>{{ object.first_name }} {{ object.last_name }}</strong> has not written anything till now.</p>
+            <br>
+        {% endif %}    
     </div>
 
     <!-- listing articles by the author in this profile -->
@@ -69,7 +74,8 @@
                     {% if article.author.avatar %}
                         <img class="" style="width: 20px; border-radius: 50%;" src="{{article.author.avatar}}">
                     {% else %}
-                        <img class="" style="width: 20px; border-radius: 50%;" src="https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg" alt="">
+                        <!-- <img class="" style="width: 20px; border-radius: 50%;" src="https://raw.githubusercontent.com/CoreyMSchafer/code_snippets/master/Django_Blog/08-Profile-And-Images/django_project/media/default.jpg" alt=""> -->
+                        <img class="inline-block" style="width: 20px; border-radius: 50%;" src="{% gravatar_url object.email 20 %}" alt="">
                     {% endif %}
                     <a href="{% url 'profile' article.author.username %}">{{ article.author }}</a> <br>
                     {{ article.date }}</span>
