@@ -37,6 +37,7 @@ class ProfileView(DetailView):
     def get_context_data(self, **kwargs):
             context = super(ProfileView, self).get_context_data(**kwargs)
             context['article_list'] = Article.objects.all()
+            context['articles_by_user_list'] = Article.objects.filter(author=self.get_object()) #.request.user)
             # context['venue_list'] = Venue.objects.all()
             # context['festival_list'] = Festival.objects.all()
             # And so on for more models
