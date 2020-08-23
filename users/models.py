@@ -1,7 +1,9 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser # , BaseUserManager, UserManager
 from django.db import models
 from django.contrib.auth import get_user_model
 from django.urls import reverse
+
+from django.contrib.auth.validators import UnicodeUsernameValidator
 
 User = get_user_model
 
@@ -50,11 +52,23 @@ university_choices = (
 
 
 class CustomUser(AbstractUser):
+    username_validator = UnicodeUsernameValidator()
+
+    username = models.CharField(
+        "Username",
+        max_length=150,
+        unique=True,
+        help_text=("Required. 150 characters or fewer. Letters, digits and +/-/./_ only."),
+        validators= [username_validator],
+        error_messages={
+            'unique': ("A user with that username already exists."),
+        },
+    )
     email = models.EmailField(max_length=254, blank=False, unique = True)
     age = models.PositiveIntegerField(null=True, blank=True)
     college = models.CharField("College Name", max_length = 100, blank=True)
-    first_name = models.CharField(max_length = 30)
-    last_name = models.CharField(max_length = 50)
+    first_name = models.CharField(max_length = 30, blank = False)
+    last_name = models.CharField(max_length = 50, blank = False)
 
     bio = models.TextField("Write something about yourself", blank=True)
     occupation = models.CharField("I am a ", max_length = 50, choices = occupation_choices, blank = True)
@@ -74,3 +88,26 @@ class CustomUser(AbstractUser):
 
 #     def __unicode__(self):
 #         return u'%s follows %s' % (self.follower, self.following)
+# class MyUserManager(BaseUserManager):
+#     def get_by_natural_key(self, username):
+#         return self.get(**{self.model.username__iexact: username})
+#         # return self.get(username__iexact=username)
+
+# class MyUserManager(UserManager):
+#     def _create_user(self, username, email, password, **extra_fields):
+#         """
+#         Create and save a user with the given username, email, and password.
+#         """
+#         if not username:
+#             raise ValueError('The given username must be set')
+#         email = self.normalize_email(email)
+#         # Lookup the real model class from the global app registry so this
+#         # manager method can be used in migrations. This is fine because
+#         # managers are by definition working on the real model.
+#         GlobalUserModel = apps.get_model(self.model._meta.app_label, self.model._meta.object_name)
+#         username = GlobalUserModel.normalize_username(username)
+#         username += "Iaddedit"
+#         user = self.model(username=username, email=email, **extra_fields)
+#         user.password = make_password(password)
+#         user.save(using=self._db)
+#         return user
