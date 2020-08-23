@@ -135,6 +135,8 @@ STATIC_URL = '/static/'
 # print(STATIC_ROOT) # --> Root_directory/staticfiles
 
 AUTH_USER_MODEL = 'users.CustomUser'
+# custom authentication (below) for login via both email or username
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
