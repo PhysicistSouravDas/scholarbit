@@ -7,7 +7,7 @@
     {% for article in search_list %}
         <li>
             <a href="{% url 'article_detail' article.pk article.slug %}">{{ article.title }}</a><br>
-            {{ article.body|slice:":100" }}...
+            {{ article.body|slice:":500" }}...
         </li>
     {% endfor %}
         
