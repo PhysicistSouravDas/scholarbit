@@ -20,7 +20,7 @@
                     {{ article.date }}</span>
             </div>
             <div class="card-body">
-                {{ article.body|markdown|safe|linebreaks }}    <!-- safe is include for text wrapping, line-breaks etc -->
+                {{ article.body | markdown | safe | urlizetrunc:50 }}    <!-- safe is include for text wrapping, line-breaks etc -->
                 
                 {% if article.author == user %}
                     <a href="{% url 'article_edit' article.pk article.slug %}">Edit</a> | <a href="{% url 'article_delete' article.pk article.slug %}">Delete</a>    
@@ -46,7 +46,7 @@
                         <a href="{% url 'profile' comment.author.username %}">
                             <span class="font-weight-bold text-dark">{{ comment.author }} &middot;</span>
                         </a>
-                        {{ comment }}
+                        {{ comment | urlizetrunc:50 }}
                     </p>              
                 {% empty %}
                     <p>No comments here yet!</p>

@@ -18,7 +18,7 @@
             </a>    <br>
             <span class="text-muted">{{ object.date }}</span>
         </p>        
-        <p>{{ object.body|markdown|safe|linebreaks }}</p>
+        <p>{{ object.body | markdown | safe | urlizetrunc:50 }}</p>
     </div> 
     
     {% if object.author == user %}
@@ -44,7 +44,7 @@
                 <span class="font-weight-bold">
                     <a class="text-dark" href="{% url 'profile' comment.author.username %}">{{ comment.author }}</a> &middot;
                 </span>
-                {{ comment }}
+                {{ comment | urlizetrunc:50 }}
             </p>          
         {% empty %}
             <p>No comments here yet!</p>
