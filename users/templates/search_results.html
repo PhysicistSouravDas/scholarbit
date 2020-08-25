@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load markdown_extras %}
+{% load gravatar %}
 
 {% block title %}Search -  {% endblock title %}
 
 {% block content %}
 <div class="container-fluid">
-    <div class="card">
+    <div class="card mb-2">
         <div class="card-body">
             <h5 class="card-title">
                 You searched for "{{ query }}"!
@@ -20,22 +21,82 @@
             </ol>
         </div>
     </div>
-    {% if search_count %}
-        <strong>{{ search_count }}</strong>
-    {% else %}
-        <strong>Noting Found!</strong>
-    {% endif %}
+
     {% if '@' not in query %}
+
+        {% if search_count %}
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                <p class="card-text">{{ search_count }} article{{ search_count | pluralize }} found from your search !</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                <p class="card-text">No articles found matching your search !</p>
+                </div>
+            </div>
+        {% endif %}
+
         {% for article in search_list %}
-            
-                <a href="{% url 'article_detail' article.pk article.slug %}">{{ article.title }}</a><br>
-                {{ article.body|safe|slice:":500" }} ...
-            
+            <div class="card">
+                <div class="card-header">
+                    <h5><a href="{% url 'article_detail' article.pk article.slug %}">{{ article.title }}</a></h5>
+                    <div class="media">
+                        {% if user.avatar %}
+                            <img class="align-self-center mr-3" style="width: 40px; border-radius: 50%;" src="{{article.author.avatar}}">
+                        {% else %}
+                            <img class="align-self-center mr-3" style="width: 40px; border-radius: 50%;" src="{% gravatar_url article.author.email 40 %}" alt="">
+                        {% endif %}
+                        <div class="media-body">
+                            <p class="d-inline"><a href="{% url 'profile' article.author.username %}">{{ article.author.username }}</a></p>
+                            <p>Posted {{ article.date | timesince }} ago</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{ article.body | safe | truncatewords_html:30 }}</p> <!-- slice:":500" -->
+                </div>
+            </div>
         {% endfor %}
-    {% else %}    
+    {% else %}
+    
+        {% if search_count %}
+            <div class="card text-white bg-secondary mb-3">
+                <div class="card-body">
+                <p class="card-text">{{ search_count }} user{{ search_count | pluralize }} found from your search !</p>
+                </div>
+            </div>
+        {% else %}
+            <div class="card text-white bg-danger mb-3">
+                <div class="card-body">
+                <p class="card-text">No users found matching your search !</p>
+                </div>
+            </div>
+        {% endif %}
+        
+
+        <div class="row">
         {% for user in search_list %}
-            {{ user.username }}  
+                <div class="col-sm-4 mb-2">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-2 align-self-center">
+                                {% if user.avatar %}
+                                    <img class="ml-3" style="width: 40px; border-radius: 50%;" src="{{user.avatar}}">
+                                {% else %}
+                                    <img class="ml-3" style="width: 40px; border-radius: 50%;" src="{% gravatar_url user.email 40 %}" alt="">
+                                {% endif %}
+                            </div>
+                            <div class="card-body col-10">
+                                <h5 class="card-title">{{ user.first_name }} {{ user.last_name }}</h5>
+                                <p class="card-text text-muted">@{{ user.username }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         {% endfor %}
+        </div>
     {% endif %}
 </div>        
 {% endblock content %}
