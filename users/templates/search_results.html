@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <p class="card-text">{{ article.body | safe | truncatewords_html:30 }}</p> <!-- slice:":500" -->
+                    <p class="card-text">{{ article.body | markdown | safe | truncatewords_html:30 }}</p> <!-- slice:":500" -->
                 </div>
             </div>
         {% endfor %}
