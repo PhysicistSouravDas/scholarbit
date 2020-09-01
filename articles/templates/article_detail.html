@@ -18,7 +18,7 @@
             </a>    <br>
             <span class="text-muted">{{ object.date }}</span>
         </p>        
-        <p>{{ object.body | markdown | safe | urlizetrunc:50 }}</p>
+        <div class="article-body">{{ object.body | markdown | safe | urlizetrunc:50 }}</div>
     </div> 
     
     {% if object.author == user %}

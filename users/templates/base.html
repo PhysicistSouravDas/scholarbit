@@ -4,6 +4,9 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/path/to/styles/default.css"/>
+    <script src="/path/to/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -13,6 +16,35 @@
         .jumbotron {
             background-image: url("https://image.freepik.com/free-vector/white-background-with-blue-tech-hexagon_1017-19366.jpg");
             background-size: cover;
+        }
+        .article-body code {
+            font-size: 90%;
+            line-height: 1.2em;
+            font-family: "Courier 10 Pitch", Courier, monospace; 
+            white-space: pre; 
+            white-space: pre-wrap; 
+            white-space: -moz-pre-wrap; 
+            white-space: -o-pre-wrap; 
+
+            height:1%;
+            width: auto;
+            display: block;
+            clear: both;
+            color: #555555;
+            padding: 1em 1em;
+            margin: auto 40px auto 40px;
+            background: #f4f4f4;
+            border: solid 1px #e1e1e1
+        } 
+        code.python {
+            font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+            font-size: 95%;
+            line-height: 140%;
+            white-space: pre;
+            white-space: pre-wrap;
+            white-space: -moz-pre-wrap;
+            white-space: -o-pre-wrap;
+            background: #faf8f0;
         }
     </style>
 </head>
@@ -27,7 +59,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="collapse navbar-collapse float-right w-auto" id="navbarCollapse">
             
             <!-- Search Bar -->
             <form action="{% url 'search_results' %}" method="GET" class="form-inline mt-2 mb-auto mt-md-0 ml-auto">
