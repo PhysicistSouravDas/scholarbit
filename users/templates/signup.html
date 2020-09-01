@@ -16,5 +16,10 @@
     <p class="text-muted">
         Already Registered? <a class="ml-2" href="{% url 'login' %}">Log In</a>
     </p>
+    <script>
+        $(document).ready(function(){
+            $('div#div_id_username label').text('Username*');
+        });        
+    </script>
 {% endblock content %}
     
