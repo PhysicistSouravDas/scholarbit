@@ -24,6 +24,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY1')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
+ADMINS = [('Sourav Das', 'souravdas.sd20@gmail.com')]
+
 ALLOWED_HOSTS = ['*']
 
 
