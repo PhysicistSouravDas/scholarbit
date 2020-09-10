@@ -46,7 +46,7 @@
         </div>
         <div class="card-body">
             {% if object.bio %}
-                <p>{{object.bio}}</p>
+                <p>{{ object.bio | markdown | safe }}</p>
             {% else %}
                 <p>I have not yet filled something about my profile. Though I enjoy this website very much. Return later to check my profile.</p>
             {% endif %}
@@ -55,7 +55,7 @@
     <!-- spacing -->
     <div>
         {% if articles_by_user_list %}
-            <p class="font-weight-bold">{{ article_count }} Article{{ article_count|pluralize }} by {{ object.first_name }}</p>
+            <p class="font-weight-bold">{{ article_count }} Article{{ article_count | pluralize }} by {{ object.first_name }}</p>
             <br>
         {% else %}
             <p><strong>{{ object.first_name }} {{ object.last_name }}</strong> has not written anything till now.</p>
