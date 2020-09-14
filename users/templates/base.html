@@ -37,7 +37,7 @@
             color: #555555;
             padding: 1em 1em;
             /* margin: auto 40px auto 40px; */
-            background: #f4f4f4;
+            background-color: #f4f4f4;
             border: solid 1px #e1e1e1;
             overflow-x: scroll;
         } 
@@ -58,11 +58,16 @@
             clear: both;
             color: #91a7ff;
             padding: 1em 1em;
+            /* padding: 0; */
             /* margin: auto 40px auto 40px; */
-            background: #333333;
-            border: solid 1px #e1e1e1;
+            background-color: #333333;
             overflow-x: scroll;
-        } 
+            transition: background-color 1s linear;
+        }
+        .light-code {
+            background-color: #f4f4f4 !important;
+            transition: background-color 1s linear;
+        }
     </style>
 </head>
 <body>
@@ -129,9 +134,26 @@
     <!-- Custom jQuery -->
     <script>
         $(document).ready(function(){
-            $('pre code').prepend('<button id="go-dark">Dark Mode</button><br><br>');
-            $("button#go-dark").click(function(){
-                $("pre code").addClass("dark-code");    // modification required here
+            $('pre code').prepend('<button id="go-dark">Go Dark</button><br><br>');
+            $("button").click(function(){
+                console.log("Reached till here");
+                if ($(this).attr("id") === "go-dark"){
+                    $("pre code").addClass("dark-code");
+                    $("pre").removeClass("light-code");
+                    $(".article-body pre").css("padding", "0");
+                    $(".article-body pre").css("overflow-x", "hidden");
+                    $("button#go-dark").attr("id", "go-light");
+                    $("button#go-light").html("Go Light");
+                    console.log($(this).attr("id"));
+                } else if ($(this).attr("id") === "go-light" ){
+                    $("button#go-light").attr("id", "go-dark");
+                    $("button#go-dark").html("Go Dark");
+                    $("pre code").removeClass("dark-code");
+                    $("pre").addClass("light-code");
+                    console.log("Success #2");
+                    $(".article-body pre").css("padding", "1em 1em");
+                    $(".article-body pre").css("overflow-x", "scroll");
+                };
             });
         });
     </script>
