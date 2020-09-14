@@ -144,13 +144,11 @@
                     $(".article-body pre").css("overflow-x", "hidden");
                     $("button#go-dark").attr("id", "go-light");
                     $("button#go-light").html("Go Light");
-                    console.log($(this).attr("id"));
                 } else if ($(this).attr("id") === "go-light" ){
                     $("button#go-light").attr("id", "go-dark");
                     $("button#go-dark").html("Go Dark");
                     $("pre code").removeClass("dark-code");
                     $("pre").addClass("light-code");
-                    console.log("Success #2");
                     $(".article-body pre").css("padding", "1em 1em");
                     $(".article-body pre").css("overflow-x", "scroll");
                 };
