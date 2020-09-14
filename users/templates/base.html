@@ -21,14 +21,14 @@
             background-image: url("https://image.freepik.com/free-vector/white-background-with-blue-tech-hexagon_1017-19366.jpg");
             background-size: cover;
         }
-        .article-body code {
+        .article-body pre {
             font-size: 90%;
             line-height: 1.2em;
             font-family: "Courier 10 Pitch", Courier, monospace; 
-            white-space: pre; 
+            /* white-space: pre; 
             white-space: pre-wrap; 
             white-space: -moz-pre-wrap; 
-            white-space: -o-pre-wrap; 
+            white-space: -o-pre-wrap;  */
 
             height:1%;
             width: auto;
@@ -36,19 +36,37 @@
             clear: both;
             color: #555555;
             padding: 1em 1em;
-            margin: auto 40px auto 40px;
-            background: #f4f4f4;
-            border: solid 1px #e1e1e1
+            /* margin: auto 40px auto 40px; */
+            background-color: #f4f4f4;
+            border: solid 1px #e1e1e1;
+            overflow-x: scroll;
         } 
-        code.python {
+        code {
             font-family: Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
             font-size: 95%;
             line-height: 140%;
-            white-space: pre;
+            /* white-space: pre;
             white-space: pre-wrap;
             white-space: -moz-pre-wrap;
-            white-space: -o-pre-wrap;
+            white-space: -o-pre-wrap; */
             background: #faf8f0;
+        }
+        .dark-code {
+            height:1%;
+            width: auto;
+            display: block;
+            clear: both;
+            color: #91a7ff;
+            padding: 1em 1em;
+            /* padding: 0; */
+            /* margin: auto 40px auto 40px; */
+            background-color: #333333;
+            overflow-x: scroll;
+            transition: background-color 1s linear;
+        }
+        .light-code {
+            background-color: #f4f4f4 !important;
+            transition: background-color 1s linear;
         }
     </style>
 </head>
@@ -113,5 +131,28 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <!-- Custom jQuery -->
+    <script>
+        $(document).ready(function(){
+            $('pre code').prepend('<button id="go-dark">Go Dark</button><br><br>');    // appending "Go Dark" button
+            $("button").click(function(){
+                if ($(this).attr("id") === "go-dark"){                  // If id of the button "go-dark", then execute below code block
+                    $("pre code").addClass("dark-code");                // Add "dark-code" class to code tags which are inside pre tags
+                    $("pre").removeClass("light-code");
+                    $(".article-body pre").css("padding", "0");         // overriding default values
+                    $(".article-body pre").css("overflow-x", "hidden");
+                    $("button#go-dark").attr("id", "go-light");         // change id to "go-light"
+                    $("button#go-light").html("Go Light");              // change button text to "Go Light"
+                } else if ($(this).attr("id") === "go-light" ){         // If id of the button "go-light", then execute below code block
+                    $("button#go-light").attr("id", "go-dark");
+                    $("button#go-dark").html("Go Dark");                // Change button text to "Go Dark"
+                    $("pre code").removeClass("dark-code");             // remove "dark-code" class
+                    $("pre").addClass("light-code");
+                    $(".article-body pre").css("padding", "1em 1em");   // overriding previous values
+                    $(".article-body pre").css("overflow-x", "scroll");
+                };
+            });
+        });
+    </script>
 </body>
 </html>
