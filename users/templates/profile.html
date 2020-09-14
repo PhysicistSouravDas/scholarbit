@@ -81,7 +81,7 @@
                     <a href="{% url 'profile' article.author.username %}">{{ article.author }}</a> <br>
                     {{ article.date }}</span>
             </div>
-            <div class="card-body">
+            <div class="card-body article-body">
                 {{ article.body | markdown | safe }}    <!-- safe is include for text wrapping, line-breaks etc -->
                 
                 {% if article.author == user %}
