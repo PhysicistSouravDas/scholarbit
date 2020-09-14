@@ -134,22 +134,21 @@
     <!-- Custom jQuery -->
     <script>
         $(document).ready(function(){
-            $('pre code').prepend('<button id="go-dark">Go Dark</button><br><br>');
+            $('pre code').prepend('<button id="go-dark">Go Dark</button><br><br>');    // appending "Go Dark" button
             $("button").click(function(){
-                console.log("Reached till here");
-                if ($(this).attr("id") === "go-dark"){
-                    $("pre code").addClass("dark-code");
+                if ($(this).attr("id") === "go-dark"){                  // If id of the button "go-dark", then execute below code block
+                    $("pre code").addClass("dark-code");                // Add "dark-code" class to code tags which are inside pre tags
                     $("pre").removeClass("light-code");
-                    $(".article-body pre").css("padding", "0");
+                    $(".article-body pre").css("padding", "0");         // overriding default values
                     $(".article-body pre").css("overflow-x", "hidden");
-                    $("button#go-dark").attr("id", "go-light");
-                    $("button#go-light").html("Go Light");
-                } else if ($(this).attr("id") === "go-light" ){
+                    $("button#go-dark").attr("id", "go-light");         // change id to "go-light"
+                    $("button#go-light").html("Go Light");              // change button text to "Go Light"
+                } else if ($(this).attr("id") === "go-light" ){         // If id of the button "go-light", then execute below code block
                     $("button#go-light").attr("id", "go-dark");
-                    $("button#go-dark").html("Go Dark");
-                    $("pre code").removeClass("dark-code");
+                    $("button#go-dark").html("Go Dark");                // Change button text to "Go Dark"
+                    $("pre code").removeClass("dark-code");             // remove "dark-code" class
                     $("pre").addClass("light-code");
-                    $(".article-body pre").css("padding", "1em 1em");
+                    $(".article-body pre").css("padding", "1em 1em");   // overriding previous values
                     $(".article-body pre").css("overflow-x", "scroll");
                 };
             });
